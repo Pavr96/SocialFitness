@@ -1,0 +1,80 @@
+.workout-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.workout-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.workout-detail-header h1 {
+  color: #2c3e50;
+}
+
+.workout-info {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.workout-info p {
+  margin: 0.5rem 0;
+  color: #34495e;
+}
+
+.exercises-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.exercises-list h2 {
+  color: #2c3e50;
+}
+
+.info-text {
+  color: #7f8c8d;
+  font-style: italic;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.exercise-item {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.exercise-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.exercise-header h3 {
+  color: #2c3e50;
+  margin: 0;
+}
+
+.muscle-group-badge {
+  background-color: #3498db;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
+
+.exercise-description {
+  color: #7f8c8d;
+  margin: 0;
+  font-size: 0.9rem;
+}
