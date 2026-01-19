@@ -23,9 +23,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <Link to="/" className={isActive('/') ? 'active' : ''}>
             Home
           </Link>
-          <Link to="/workouts" className={isActive('/workouts') ? 'active' : ''}>
-            Workouts
-          </Link>
           <Link to="/history" className={isActive('/history') ? 'active' : ''}>
             History
           </Link>

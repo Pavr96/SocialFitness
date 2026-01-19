@@ -1,8 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { workoutStore } from '../../store/workoutStore';
 import './Home.css';
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleStartWorkout = () => {
+    workoutStore.startWorkout();
+    navigate('/active-workout');
+  };
+
   return (
     <div className="home">
       <div className="home-header">
@@ -11,10 +19,10 @@ const Home: React.FC = () => {
       </div>
       
       <div className="home-actions">
-        <Link to="/workouts" className="action-card">
-          <h2>💪 My Workouts</h2>
-          <p>View and manage your workout routines</p>
-        </Link>
+        <button onClick={handleStartWorkout} className="action-card action-button">
+          <h2>🏋️ Start Workout</h2>
+          <p>Begin a new workout session</p>
+        </button>
         
         <Link to="/history" className="action-card">
           <h2>📊 Workout History</h2>
@@ -25,9 +33,10 @@ const Home: React.FC = () => {
       <div className="home-info">
         <h2>Getting Started</h2>
         <ol>
-          <li>Create a new workout by selecting exercises</li>
-          <li>Start a workout session to log your exercises</li>
-          <li>Track your progress in the history section</li>
+          <li>Click "Start Workout" to begin a new session</li>
+          <li>Add exercises from the exercise list</li>
+          <li>Log your sets, reps, and weight for each exercise</li>
+          <li>Stop the workout when finished - all data will be saved</li>
         </ol>
       </div>
     </div>

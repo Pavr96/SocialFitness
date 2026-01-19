@@ -2,10 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home/Home';
-import Workouts from './pages/Workouts/Workouts';
-import CreateWorkout from './pages/CreateWorkout/CreateWorkout';
-import WorkoutDetail from './pages/WorkoutDetail/WorkoutDetail';
-import WorkoutSession from './pages/WorkoutSession/WorkoutSession';
+import ActiveWorkout from './pages/ActiveWorkout/ActiveWorkout';
+import AddExercise from './pages/AddExercise/AddExercise';
+import CurrentExercise from './pages/CurrentExercise/CurrentExercise';
 import History from './pages/History/History';
 import './App.css';
 
@@ -15,10 +14,9 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/workouts" element={<Workouts />} />
-          <Route path="/workouts/new" element={<CreateWorkout />} />
-          <Route path="/workouts/:id" element={<WorkoutDetail />} />
-          <Route path="/workouts/:id/session" element={<WorkoutSession />} />
+          <Route path="/active-workout" element={<ActiveWorkout />} />
+          <Route path="/active-workout/add-exercise" element={<AddExercise />} />
+          <Route path="/active-workout/exercise/:index" element={<CurrentExercise />} />
           <Route path="/history" element={<History />} />
         </Routes>
       </Layout>

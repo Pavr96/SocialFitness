@@ -1,10 +1,22 @@
-import { Workout, WorkoutSession } from '../types';
+import { Workout, WorkoutSession, WorkoutSessionExercise } from '../types';
+
+// Active workout session state
+interface ActiveWorkoutState {
+  isActive: boolean;
+  startTime: string | null;
+  exercises: WorkoutSessionExercise[];
+}
 
 // In-memory store for workouts and sessions
 // Data will be lost on page refresh - backend persistence will be added later
 class WorkoutStore {
   private workouts: Workout[] = [];
   private sessions: WorkoutSession[] = [];
+  private activeWorkout: ActiveWorkoutState = {
+    isActive: false,
+    startTime: null,
+    exercises: []
+  };
 
   // Workout methods
   getWorkouts(): Workout[] {
@@ -52,10 +64,59 @@ class WorkoutStore {
     this.sessions = this.sessions.filter(s => s.id !== id);
   }
 
+  // Active workout methods
+  startWorkout(): void {
+    this.activeWorkout = {
+      isActive: true,
+      startTime: new Date().toISOString(),
+      exercises: []
+    };
+  }
+
+  stopWorkout(): WorkoutSession | null {
+    if (!this.activeWorkout.isActive || this.activeWorkout.exercises.length === 0) {
+      this.activeWorkout = { isActive: false, startTime: null, exercises: [] };
+      return null;
+    }
+
+    const session: WorkoutSession = {
+      id: `session-${Date.now()}`,
+      date: this.activeWorkout.startTime || new Date().toISOString(),
+      exercises: this.activeWorkout.exercises
+    };
+
+    this.saveWorkoutSession(session);
+    this.activeWorkout = { isActive: false, startTime: null, exercises: [] };
+    return session;
+  }
+
+  getActiveWorkout(): ActiveWorkoutState {
+    return { ...this.activeWorkout };
+  }
+
+  addExerciseToActiveWorkout(exercise: WorkoutSessionExercise): void {
+    if (this.activeWorkout.isActive) {
+      this.activeWorkout.exercises.push(exercise);
+    }
+  }
+
+  updateActiveWorkoutExercise(exerciseIndex: number, exercise: WorkoutSessionExercise): void {
+    if (this.activeWorkout.isActive && this.activeWorkout.exercises[exerciseIndex]) {
+      this.activeWorkout.exercises[exerciseIndex] = exercise;
+    }
+  }
+
+  removeExerciseFromActiveWorkout(exerciseIndex: number): void {
+    if (this.activeWorkout.isActive) {
+      this.activeWorkout.exercises.splice(exerciseIndex, 1);
+    }
+  }
+
   // Utility methods
   clearAll(): void {
     this.workouts = [];
     this.sessions = [];
+    this.activeWorkout = { isActive: false, startTime: null, exercises: [] };
   }
 }
 
